@@ -1,10 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import "./form.css";
 import List from '../List/List';
 
-function Form({ arr, setArr }) {
-    const formRef = useRef();
-    const [editingId, setEditingId] = useState(null);
+function Form({ arr, setArr,formRef,editingId,setEditingId }) {
 
     function handleChange(e) {
         e.preventDefault();
