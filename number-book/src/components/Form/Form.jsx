@@ -76,6 +76,7 @@ function Form({ arr, setArr }) {
     return (
         <>
             <form className="container__form" onSubmit={handleChange}>
+                <h1>Number List</h1>
                 <input className="container__input" ref={nameRef} name="name" placeholder="Name..." />
                 <input className="container__input" ref={surnameRef} name="surname" placeholder="Surname..." />
                 <input className="container__input" ref={emailRef} name="email" placeholder="Email..." />
