@@ -3,22 +3,18 @@ import "./form.css";
 import List from '../List/List';
 
 function Form({ arr, setArr }) {
-    const nameRef = useRef();
-    const surnameRef = useRef();
-    const emailRef = useRef();
-    const numberRef = useRef();
-    const imgRef = useRef();
-    const statusRef = useRef();
+    const formRef = useRef();
     const [editingId, setEditingId] = useState(null);
 
     function handleChange(e) {
         e.preventDefault();
-        const name = nameRef.current.value;
-        const surname = surnameRef.current.value;
-        const email = emailRef.current.value;
-        const number = numberRef.current.value;
-        const img = imgRef.current.value;
-        const status = statusRef.current.value; 
+        const formData = new FormData(formRef.current);
+        const name = formData.get("name");
+        const surname = formData.get("surname");
+        const email = formData.get("email");
+        const number = formData.get("number");
+        const img = formData.get("img");
+        const status = formData.get("status");
         const id = new Date().getTime().toString();
 
         if (editingId) {
@@ -31,7 +27,7 @@ function Form({ arr, setArr }) {
                         number: number,
                         id: item.id,
                         img: img,
-                        status: status 
+                        status: status
                     };
                 }
                 return item;
@@ -44,27 +40,22 @@ function Form({ arr, setArr }) {
                 email: email,
                 number: number,
                 img: img,
-                status: status, 
+                status: status,
                 id: id
             }]);
         }
-        nameRef.current.value = '';
-        surnameRef.current.value = '';
-        emailRef.current.value = '';
-        numberRef.current.value = '';
-        imgRef.current.value = '';
-        statusRef.current.value = ''; 
+        formRef.current.reset();
     }
 
     function handleEdit(id) {
         const itemToEdit = arr.find(item => item.id === id);
         if (itemToEdit) {
-            nameRef.current.value = itemToEdit.name;
-            surnameRef.current.value = itemToEdit.surname;
-            emailRef.current.value = itemToEdit.email;
-            numberRef.current.value = itemToEdit.number;
-            imgRef.current.value = itemToEdit.img;
-            statusRef.current.value = itemToEdit.status; 
+            formRef.current.elements.name.value = itemToEdit.name;
+            formRef.current.elements.surname.value = itemToEdit.surname;
+            formRef.current.elements.email.value = itemToEdit.email;
+            formRef.current.elements.number.value = itemToEdit.number;
+            formRef.current.elements.img.value = itemToEdit.img;
+            formRef.current.elements.status.value = itemToEdit.status;
             setEditingId(id);
         }
     }
@@ -75,18 +66,18 @@ function Form({ arr, setArr }) {
 
     return (
         <>
-            <form className="container__form" onSubmit={handleChange}>
+            <form className="container__form" ref={formRef} onSubmit={handleChange}>
                 <h1>Number List</h1>
-                <input className="container__input" ref={nameRef} name="name" placeholder="Name..." />
-                <input className="container__input" ref={surnameRef} name="surname" placeholder="Surname..." />
-                <input className="container__input" ref={emailRef} name="email" placeholder="Email..." />
-                <input className="container__input" ref={numberRef} name="number" placeholder="+374..." />
-                <input className="container__input" ref={imgRef} name="img" placeholder="img url.." />
-                <select className="container__input" ref={statusRef} name="status">
+                <input className="container__input" name="name" placeholder="Name..." />
+                <input className="container__input" name="surname" placeholder="Surname..." />
+                <input className="container__input" name="email" placeholder="Email..." />
+                <input className="container__input" name="number" placeholder="+374..." />
+                <input className="container__input" name="img" placeholder="img url.." />
+                <select className="container__input" name="status">
                     <option value="Live">Live</option>
                     <option value="Offline">Offline</option>
                 </select>
-                <button type="submit">{editingId ? 'Update' : 'Add'}</button>
+                <button className='container__add' type="submit">{editingId ? 'Update' : 'Add'}</button>
             </form>
             <ul className="container__names">
                 {arr.map((el) => (
