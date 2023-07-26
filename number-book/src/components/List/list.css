@@ -1,66 +1,78 @@
-/* .container__names{
-display: flex;
-flex-direction: column;
-border: 4px dashed burlywood;
-max-height: 300px;
-overflow-y: auto;
-}
-.container__name{
+.container__cart {
     display: flex;
-    justify-content: space-evenly;
-    background-color: aliceblue;
-    width: 600px;
-    border: 1px solid;
+    border: 1px solid black;
+    align-items: center;
+    padding: 10px;
+    gap: 20px;
+    background-color: antiquewhite;
+    /* z-index: -1000; */
 
 }
-.container__name:hover{
-    background-color: antiquewhite;
-    cursor: pointer;
-} */
-.container__names{
+
+.container__cart-image {
+    /* height: 200px; */
+}
+
+.container__cart-image img {
+    width: 100px;
+    height: auto;
+    position: relative;
+    z-index: 10000000000000000;
+}
+
+.container__cart-all {
     display: flex;
-    gap: 4px;
-    color: wheat;
-    padding: 10px;
     flex-direction: column;
-    width: 700px;
+    z-index: 1000000;
 }
-.container__name{
-    list-style-type: none;
-    display: flex;
-    justify-content: space-between;
-    background-color: black;
-    align-items: center;
-    color: wheat;
-    padding: 10px;
-    border-radius: 5px;
-}
-.container__name span{
-display: flex;
-text-align: center;
-}
-.container__name div button{
-   border: none;
-   padding: 5px;
-   color: wheat;
-   background-color: rgb(58, 58, 183);
-   margin: 2px;
-   cursor: pointer;
-    }
-.container__name img{
-    width: 30px;
+
+.container__offLine {
+    width: 5px;
+    height: 5px;
+    background-color: red;
     border-radius: 50%;
-    border: 1px solid wheat;
+    position: absolute;
 }
-.container__live{
-    width: 10px;
-    height: 10px;
+
+.container__live {
+    width: 5px;
+    height: 5px;
     background-color: green;
     border-radius: 50%;
+    position: absolute;
 }
-.container__offLine{
-    width: 10px;
-    height: 10px;
-    background-color: rgb(238, 3, 3);
-    border-radius: 50%;
+
+.container__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.container__button {
+    background-color: rgb(111, 0, 255);
+    border-radius: 5px;
+    color: wheat;
+    cursor: pointer;
+    font-weight: bolder;
+    padding: 5px;
+    border: none;
+}
+
+.container__button--red {
+    background-color: rgb(255, 0, 0);
+    border-radius: 5px;
+
+    color: wheat;
+    cursor: pointer;
+    font-weight: bolder;
+    padding: 5px;
+    border: none;
+}
+
+.container__color {
+    color: black;
+    font-weight: bolder;
+    font-size: 13px;
+    font-family: sans-serif;
 }
