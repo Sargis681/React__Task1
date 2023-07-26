@@ -21,7 +21,7 @@ function List({
           }
         ></span>
 
-        <img src={img} alt="" />
+        <img src={img?img:"https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="" />
       </div>
       <div className="container__cart-all">
         <span>

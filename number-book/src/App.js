@@ -37,7 +37,8 @@ function App() {
         <h1>Number List</h1>
         <button onClick={toggleFront}>New Contacts</button>
       </div>
-      {front ? (
+      {
+        <div style={{opacity:front?"0":"1"}}>
         <Form
           editingId={editingId}
           setEditingId={setEditingId}
@@ -46,9 +47,10 @@ function App() {
           setArr={setArr}
           setFront={setFront}
         />
-      ) : (
-        ""
-      )}
+        </div>
+      
+      }
+      )
 
       <AllLists arr={arr} onDelete={handleDelete} onEdit={handleEdit} />
     </div>

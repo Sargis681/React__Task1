@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import "./form.css";
 
-function Form({ arr, setArr, formRef, editingId, setEditingId, setFront }) {
+function Form({ arr, setArr, formRef, editingId, setEditingId, front, setFront }) {
   const emailRef = useRef();
 
   function handleChange(e) {
     e.preventDefault();
-    setFront(false);
-    const formData = new FormData(formRef.current); // Ensure formRef is not null before using it
+    setFront(prev => !prev); // Toggle the value of front
+    const formData = new FormData(formRef.current);
     const name = formData.get("name");
     const surname = formData.get("surname");
     const email = formData.get("email");
@@ -16,14 +16,13 @@ function Form({ arr, setArr, formRef, editingId, setEditingId, setFront }) {
     const status = formData.get("status");
     const id = new Date().getTime().toString();
 
-    // Email validation regex pattern
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (editingId) {
-      setArr(
-        arr.map((item) => {
+      setFront(prev => !prev);
+      setArr(prevArr => 
+        prevArr.map((item) => {
           if (item.id === editingId) {
-            setFront(true);
             return {
               name: name,
               surname: surname,
@@ -39,14 +38,14 @@ function Form({ arr, setArr, formRef, editingId, setEditingId, setFront }) {
       );
       setEditingId(null);
     } else if (
-      emailRegex.test(email) && // Check if the email matches the regex pattern
+      emailRegex.test(email) &&
       name !== "" &&
       surname !== "" &&
       email !== "" &&
       number !== ""
     ) {
-      setArr([
-        ...arr,
+      setArr(prevArr => [
+        ...prevArr,
         {
           name: name,
           surname: surname,
@@ -60,6 +59,7 @@ function Form({ arr, setArr, formRef, editingId, setEditingId, setFront }) {
     }
     formRef.current.reset();
   }
+
 
   return (
     <>
@@ -91,7 +91,7 @@ function Form({ arr, setArr, formRef, editingId, setEditingId, setFront }) {
           <option value="Live">Live</option>
           <option value="Offline">Offline</option>
         </select>
-        <button className="container__add" type="submit">
+        <button  className="container__add" type="submit">
           {editingId ? "Update" : "Add"}
         </button>
       </form>
