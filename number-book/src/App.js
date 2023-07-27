@@ -7,10 +7,14 @@ function App() {
   const [arr, setArr] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [front, setFront] = useState(true);
+  const [mail, setMail] = useState(false);
+  const [edit, setEdit] = useState(true);
 
   const formRef = useRef();
 
   function handleEdit(id) {
+    console.log("barevner");
+    setEdit(false);
     const itemToEdit = arr.find((item) => item.id === id);
     if (itemToEdit) {
       formRef.current.elements.name.value = itemToEdit.name;
@@ -51,6 +55,9 @@ function App() {
             arr={arr}
             setArr={setArr}
             setFront={setFront}
+            mail={mail}
+            setMail={setMail}
+            edit={edit}
           />
         </div>
       }
@@ -60,6 +67,7 @@ function App() {
         arr={arr}
         onDelete={handleDelete}
         onEdit={handleEdit}
+        mail={mail}
       />
     </div>
   );

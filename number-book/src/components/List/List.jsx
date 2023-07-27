@@ -12,6 +12,7 @@ function List({
   img,
   status,
   editView,
+  mail,
 }) {
   return (
     <div className="container__cart">

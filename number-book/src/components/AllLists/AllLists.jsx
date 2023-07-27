@@ -1,7 +1,7 @@
 import React from "react";
 import List from "../List/List";
 import "./AllLists.css";
-function AllLists({ arr, onDelete, onEdit, editView }) {
+function AllLists({ arr, onDelete, onEdit, editView, mail }) {
   return (
     <div className="container__allLists">
       {arr.map((el) => (
@@ -17,6 +17,7 @@ function AllLists({ arr, onDelete, onEdit, editView }) {
           onDelete={onDelete}
           onEdit={onEdit}
           editView={editView}
+          mail={mail}
         />
       ))}
     </div>
