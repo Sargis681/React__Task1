@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: brown;
+  /* background-color: brown; */
 }
 
 .container {
@@ -28,4 +28,10 @@ body {
   color: wheat;
   font-family: sans-serif;
   border-radius: 10px;
+}
+
+.container__formHead {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

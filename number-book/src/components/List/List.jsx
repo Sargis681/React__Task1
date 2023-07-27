@@ -11,6 +11,7 @@ function List({
   onEdit,
   img,
   status,
+  editView,
 }) {
   return (
     <div className="container__cart">
@@ -21,7 +22,12 @@ function List({
           }
         ></span>
 
-        <img src={img?img:"https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="" />
+        <img
+          src={
+            img ? img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+          }
+          alt=""
+        />
       </div>
       <div className="container__cart-all">
         <span>
@@ -39,7 +45,13 @@ function List({
         </span>
       </div>
       <div className="container__buttons">
-        <button className="container__button" onClick={() => onEdit(id)}>
+        <button
+          className="container__button"
+          onClick={() => {
+            onEdit(id);
+            editView();
+          }}
+        >
           Edit
         </button>
         <button className="container__button--red" onClick={() => onDelete(id)}>

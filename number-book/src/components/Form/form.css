@@ -4,19 +4,20 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-    background-color: black;
+    /* background-color: black; */
+    margin: 40px auto;
     padding: 20px;
     border-radius: 30px;
-    border: 4px solid rgb(0, 0, 0);
+    border: 4px solid rgb(80, 80, 80);
 }
 
 
 .container__form select {
-    background-image: linear-gradient(to bottom right, red, rgb(79, 185, 9));
+    /* background-image: linear-gradient(to bottom right, red, rgb(79, 185, 9)); */
 }
 
 .container__add {
-    background-color: blueviolet;
+    background-color: rgb(83, 43, 226);
     cursor: pointer;
     color: wheat;
     font-weight: bolder;
@@ -33,7 +34,6 @@
     padding: 5px;
     color: rgb(19, 19, 19);
     font-weight: bolder;
-    background-color: blue;
     border: none;
 
     border: 3px solid rgb(34, 20, 20);

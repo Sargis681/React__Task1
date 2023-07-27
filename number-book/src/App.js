@@ -30,7 +30,9 @@ function App() {
     setFront((prevFront) => !prevFront);
     console.log(front);
   }
-
+  function editView() {
+    setFront(false);
+  }
   return (
     <div className="container">
       <div className="container__header">
@@ -38,21 +40,27 @@ function App() {
         <button onClick={toggleFront}>New Contacts</button>
       </div>
       {
-        <div style={{opacity:front?"0":"1"}}>
-        <Form
-          editingId={editingId}
-          setEditingId={setEditingId}
-          formRef={formRef}
-          arr={arr}
-          setArr={setArr}
-          setFront={setFront}
-        />
+        <div
+          className="container__formHead"
+          style={{ display: front ? "none" : "block" }}
+        >
+          <Form
+            editingId={editingId}
+            setEditingId={setEditingId}
+            formRef={formRef}
+            arr={arr}
+            setArr={setArr}
+            setFront={setFront}
+          />
         </div>
-      
       }
-      )
 
-      <AllLists arr={arr} onDelete={handleDelete} onEdit={handleEdit} />
+      <AllLists
+        editView={editView}
+        arr={arr}
+        onDelete={handleDelete}
+        onEdit={handleEdit}
+      />
     </div>
   );
 }

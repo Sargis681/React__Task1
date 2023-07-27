@@ -6,40 +6,55 @@
     gap: 20px;
     background-color: antiquewhite;
     /* z-index: -1000; */
+    border-radius: 10px;
 
 }
 
 .container__cart-image {
-    /* height: 200px; */
+    /* width: 100px; */
+    position: relative;
+    /* border: 2px solid rgb(163, 160, 160); */
+    display: flex;
+    align-items: center;
+
+
 }
 
 .container__cart-image img {
     width: 100px;
     height: auto;
-    position: relative;
-    z-index: 10000000000000000;
+    z-index: 1000000;
+    border-radius: 5px;
+
 }
 
 .container__cart-all {
     display: flex;
     flex-direction: column;
     z-index: 1000000;
+    width: 400px;
 }
 
 .container__offLine {
-    width: 5px;
-    height: 5px;
-    background-color: red;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(194, 45, 40);
     border-radius: 50%;
+    z-index: 1000000000000000000000000000000;
+    top: 0;
     position: absolute;
+    right: 0;
 }
 
 .container__live {
-    width: 5px;
-    height: 5px;
+    width: 8px;
+    height: 8px;
     background-color: green;
     border-radius: 50%;
+    z-index: 1000000000000000000000000000000;
+    top: 0;
     position: absolute;
+    right: 0;
 }
 
 .container__buttons {
