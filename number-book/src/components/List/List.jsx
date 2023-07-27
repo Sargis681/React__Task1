@@ -1,5 +1,7 @@
 import React from "react";
 import "./list.css";
+import { useDispatch, useSelector } from "react-redux";
+import { selectForm } from "../store/formSlices/formSlice";
 
 function List({
   name,
@@ -14,6 +16,8 @@ function List({
   editView,
   mail,
 }) {
+  const form = useSelector(selectForm)
+  console.log(form);
   return (
     <div className="container__cart">
       <div className="container__cart-image">

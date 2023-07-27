@@ -13,7 +13,6 @@ function Form() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const emailValue = e.target.value;
     setVal(e.target.value);
-    // Assuming you have some action to update the email field in the Redux store
   }
 
   function handleChange(e) {

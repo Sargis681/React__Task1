@@ -5,8 +5,8 @@ const formSlice = createSlice({
   initialState: [],
   reducers: {
     addForm(state, { payload }) {
-      console.log(payload);
       const { name, surname, email, number, img, status } = payload;
+
       const id = new Date().getTime().toString();
 
       return [
