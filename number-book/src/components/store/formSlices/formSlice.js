@@ -1,10 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const formSlices = createSlice({
+const formSlice = createSlice({
   name: "form",
   initialState: [],
-  reducers: {},
+  reducers: {
+    addForm(state, { payload }) {
+      console.log(payload);
+      const { name, surname, email, number, img, status } = payload;
+      const id = new Date().getTime().toString();
+
+      return [
+        ...state,
+        {
+          name: name,
+          surname: surname,
+          email: email,
+          number: number,
+          img: img,
+          status: status,
+          id: id,
+        },
+      ];
+    },
+  },
 });
+
 export const selectForm = (state) => state.form;
-export const formReducer = formSlices.reducer;
-export const {} = formSlices.actions;
+export const formReducer = formSlice.reducer;
+export const { addForm } = formSlice.actions;
