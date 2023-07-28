@@ -1,23 +1,18 @@
 import React from "react";
 import "./list.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectForm } from "../store/formSlices/formSlice";
+import {
+  deleteList,
+  editForm,
+  selectForm,
+} from "../store/formSlices/formSlice";
 
-function List({
-  name,
-  surName,
-  email,
-  number,
-  id,
-  onDelete,
-  onEdit,
-  img,
-  status,
-  editView,
-  mail,
-}) {
-  const form = useSelector(selectForm)
-  console.log(form);
+function List({ name, surName, email, number, id, onDelete, img, status }) {
+  const { contacts } = useSelector(selectForm);
+  const dispatch = useDispatch();
+  console.log(contacts);
+  console.log("dasdsa");
+
   return (
     <div className="container__cart">
       <div className="container__cart-image">
@@ -50,16 +45,11 @@ function List({
         </span>
       </div>
       <div className="container__buttons">
+        <button className="container__button">Edit</button>
         <button
-          className="container__button"
-          onClick={() => {
-            onEdit(id);
-            editView();
-          }}
+          className="container__button--red"
+          onClick={() => dispatch(deleteList(id))}
         >
-          Edit
-        </button>
-        <button className="container__button--red" onClick={() => onDelete(id)}>
           Delete
         </button>
       </div>

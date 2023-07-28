@@ -12,24 +12,6 @@ function App() {
 
   const formRef = useRef();
 
-  function handleEdit(id) {
-    console.log("barevner");
-    setEdit(false);
-    const itemToEdit = arr.find((item) => item.id === id);
-    if (itemToEdit) {
-      formRef.current.elements.name.value = itemToEdit.name;
-      formRef.current.elements.surname.value = itemToEdit.surname;
-      formRef.current.elements.email.value = itemToEdit.email;
-      formRef.current.elements.number.value = itemToEdit.number;
-      formRef.current.elements.img.value = itemToEdit.img;
-      formRef.current.elements.status.value = itemToEdit.status;
-      setEditingId(id);
-    }
-  }
-
-  function handleDelete(id) {
-    setArr(arr.filter((item) => item.id !== id));
-  }
   function toggleFront() {
     setFront((prevFront) => !prevFront);
     console.log(front);
@@ -62,13 +44,7 @@ function App() {
         </div>
       }
 
-      <AllLists
-        editView={editView}
-        arr={arr}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-        mail={mail}
-      />
+      <AllLists />
     </div>
   );
 }
