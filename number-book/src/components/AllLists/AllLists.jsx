@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { selectForm } from "../store/formSlices/formSlice";
 function AllLists({ arr, onDelete, onEdit, editView, mail }) {
   const { contacts } = useSelector(selectForm);
-  console.log("das");
   return (
     <div className="container__allLists">
       {contacts.map((el) => (

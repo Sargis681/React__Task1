@@ -7,18 +7,13 @@ function App() {
   const [arr, setArr] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [front, setFront] = useState(true);
-  const [mail, setMail] = useState(false);
-  const [edit, setEdit] = useState(true);
 
   const formRef = useRef();
 
   function toggleFront() {
     setFront((prevFront) => !prevFront);
-    console.log(front);
   }
-  function editView() {
-    setFront(false);
-  }
+
   return (
     <div className="container">
       <div className="container__header">
@@ -37,9 +32,6 @@ function App() {
             arr={arr}
             setArr={setArr}
             setFront={setFront}
-            mail={mail}
-            setMail={setMail}
-            edit={edit}
           />
         </div>
       }

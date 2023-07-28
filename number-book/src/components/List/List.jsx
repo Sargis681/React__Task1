@@ -1,17 +1,10 @@
 import React from "react";
 import "./list.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteList,
-  editForm,
-  selectForm,
-} from "../store/formSlices/formSlice";
+import { deleteList, editForm } from "../store/formSlices/formSlice";
 
-function List({ name, surName, email, number, id, onDelete, img, status }) {
-  const { contacts } = useSelector(selectForm);
+function List({ name, surName, email, number, id, img, status }) {
   const dispatch = useDispatch();
-  console.log(contacts);
-  console.log("dasdsa");
 
   return (
     <div className="container__cart">
@@ -21,7 +14,6 @@ function List({ name, surName, email, number, id, onDelete, img, status }) {
             status === "Live" ? "container__live" : "container__offLine"
           }
         ></span>
-
         <img
           src={
             img ? img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -41,11 +33,16 @@ function List({ name, surName, email, number, id, onDelete, img, status }) {
           <span className="container__color">Email:</span> {email}
         </span>
         <span>
-          <span className="container__color"> Number:</span> {number}
+          <span className="container__color">Number:</span> {number}
         </span>
       </div>
       <div className="container__buttons">
-        <button className="container__button">Edit</button>
+        <button
+          className="container__button"
+          onClick={() => dispatch(editForm(id))}
+        >
+          Edit
+        </button>
         <button
           className="container__button--red"
           onClick={() => dispatch(deleteList(id))}
