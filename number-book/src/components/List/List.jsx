@@ -1,9 +1,9 @@
 import React from "react";
 import "./list.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteList, editForm } from "../store/formSlices/formSlice";
 
-function List({ name, surName, email, number, id, img, status }) {
+function List({ name, surName, email, number, id, img, status,favorite}) {
   const dispatch = useDispatch();
 
   return (
@@ -34,6 +34,10 @@ function List({ name, surName, email, number, id, img, status }) {
         </span>
         <span>
           <span className="container__color">Number:</span> {number}
+        {
+          favorite? <p> saddsasa</p>:""
+
+        }
         </span>
       </div>
       <div className="container__buttons">
@@ -47,6 +51,7 @@ function List({ name, surName, email, number, id, img, status }) {
           className="container__button--red"
           onClick={() => dispatch(deleteList(id))}
         >
+
           Delete
         </button>
       </div>

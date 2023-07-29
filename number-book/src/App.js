@@ -7,9 +7,8 @@ function App() {
   const [arr, setArr] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [front, setFront] = useState(true);
-
   const formRef = useRef();
-
+console.log("dasasddsaasddassda");
   function toggleFront() {
     setFront((prevFront) => !prevFront);
   }

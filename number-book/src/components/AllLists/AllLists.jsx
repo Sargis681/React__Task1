@@ -3,8 +3,9 @@ import List from "../List/List";
 import "./AllLists.css";
 import { useSelector } from "react-redux";
 import { selectForm } from "../store/formSlices/formSlice";
-function AllLists({ arr, onDelete, onEdit, editView, mail }) {
+function AllLists() {
   const { contacts } = useSelector(selectForm);
+  console.log(contacts);
   return (
     <div className="container__allLists">
       {contacts.map((el) => (
@@ -17,6 +18,7 @@ function AllLists({ arr, onDelete, onEdit, editView, mail }) {
           email={el.email}
           number={el.number}
           img={el.img}
+          favorite={el.favorite}
         />
       ))}
     </div>
