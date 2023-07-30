@@ -96,11 +96,13 @@ function Form() {
     <>
       <form className="container__form" ref={formRef} onSubmit={handleSubmit}>
         <h1>Number List</h1>
+        <div className="container__allinputs">
         <input className="container__input" name="name" placeholder="Name..." required />
         <input className="container__input" name="surname" placeholder="Surname..." required />
         <input className="container__input" name="email" placeholder="Email..." required />
         <input className="container__input" name="number" placeholder="+374..." required />
         <input className="container__input" name="img" placeholder="img url.." />
+        </div>
         <select className="container__input" name="status" required>
           <option value="Live">Live</option>
           <option value="Offline">Offline</option>

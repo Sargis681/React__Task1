@@ -4,14 +4,11 @@
 
 }
 
-body {
-  /* background-color: brown; */
-}
+
 
 .container {
   max-width: 1140px;
   margin: 0 auto;
-  /* border: 1px solid black; */
 }
 
 .container__header {
@@ -30,8 +27,8 @@ body {
   border-radius: 10px;
 }
 
-.container__formHead {
+/* .container__formHead {
   width: 100%;
   display: flex;
   justify-content: center;
-}
+} */
