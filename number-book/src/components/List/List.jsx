@@ -1,10 +1,13 @@
 import React from "react";
 import "./list.css";
 import { useDispatch } from "react-redux";
-import { deleteList, editForm } from "../store/formSlices/formSlice";
+import { deleteList, editForm,favoriteFunction } from "../store/formSlices/formSlice";
 
 function List({ name, surName, email, number, id, img, status,favorite}) {
   const dispatch = useDispatch();
+  const handleFavoriteClick = () => {
+    dispatch(favoriteFunction(id));
+  };
 
   return (
     <div className="container__cart">
@@ -34,9 +37,16 @@ function List({ name, surName, email, number, id, img, status,favorite}) {
         </span>
         <span>
           <span className="container__color">Number:</span> {number}
-        {
-          favorite? <p> saddsasa</p>:""
-
+          {
+          favorite ? (
+            <p className="container__favorite" onClick={handleFavoriteClick}>
+              ★
+            </p>
+          ) : (
+            <p className="container__favorite" onClick={handleFavoriteClick}>
+              ☆
+            </p>
+          )
         }
         </span>
       </div>

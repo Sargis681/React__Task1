@@ -3,24 +3,40 @@ import List from "../List/List";
 import "./AllLists.css";
 import { useSelector } from "react-redux";
 import { selectForm } from "../store/formSlices/formSlice";
+
 function AllLists() {
-  const { contacts } = useSelector(selectForm);
-  console.log(contacts);
+  const { contacts,favorite } = useSelector(selectForm);
+
+
   return (
     <div className="container__allLists">
-      {contacts.map((el) => (
-        <List
-          key={el.id}
-          id={el.id}
-          name={el.name}
-          surName={el.surname}
-          status={el.status}
-          email={el.email}
-          number={el.number}
-          img={el.img}
-          favorite={el.favorite}
-        />
-      ))}
+      {favorite
+        ? contacts.filter((el)=>el.favorite===true).map((el) => (
+            <List
+              key={el.id}
+              id={el.id}
+              name={el.name}
+              surName={el.surname}
+              status={el.status}
+              email={el.email}
+              number={el.number}
+              img={el.img}
+              favorite={el.favorite}
+            />
+          ))
+        : contacts.map((el) => (
+            <List
+              key={el.id}
+              id={el.id}
+              name={el.name}
+              surName={el.surname}
+              status={el.status}
+              email={el.email}
+              number={el.number}
+              img={el.img}
+              favorite={el.favorite}
+            />
+          ))}
     </div>
   );
 }
