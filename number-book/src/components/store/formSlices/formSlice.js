@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  contacts: [],
+  contacts: [
+    // ... existing contact objects ...
+  ],
+  filteredContacts: [],
   formEdit: null,
   favorite: false,
   search: "",
@@ -13,29 +16,38 @@ const formSlice = createSlice({
   reducers: {
     addForm: (state, { payload }) => {
       state.contacts.push(payload);
+      state.filteredContacts.push(payload);
     },
     editForm: (state, { payload }) => {
-      state.formEdit = state.contacts.find((contact) => contact.id === payload);
+      state.formEdit = state.filteredContacts.find(
+        (contact) => contact.id === payload
+      );
     },
     saveEditedForm: (state, { payload }) => {
-      const index = state.contacts.findIndex((contact) => contact.id === payload.id);
+      const index = state.filteredContacts.findIndex(
+        (contact) => contact.id === payload.id
+      );
       if (index !== -1) {
-        state.contacts[index] = payload;
+        state.filteredContacts[index] = payload;
         state.formEdit = null;
       }
     },
     deleteList: (state, { payload }) => {
-      state.contacts = state.contacts.filter((contact) => contact.id !== payload);
+      state.filteredContacts = state.filteredContacts.filter(
+        (contact) => contact.id !== payload
+      );
 
       if (state.formEdit && state.formEdit.id === payload) {
         state.formEdit = null;
       }
     },
     favoriteFunction: (state, { payload }) => {
-      const contactIndex = state.contacts.findIndex((contact) => contact.id === payload);
+      const contactIndex = state.filteredContacts.findIndex(
+        (contact) => contact.id === payload
+      );
 
       if (contactIndex !== -1) {
-        const contact = state.contacts[contactIndex];
+        const contact = state.filteredContacts[contactIndex];
         contact.favorite = !contact.favorite;
       }
     },
@@ -43,27 +55,28 @@ const formSlice = createSlice({
       state.favorite = !state.favorite;
       console.log(state.favorite);
     },
-    setSearchTerm: (state, action) => {
-      state.search = action.payload;
+    searchContacts: (state, { payload }) => {
+      state.search = payload;
+      console.log(state.search);
     },
-    filterContacts: (state) => {
-      const { search, favorite, contacts } = state;
-      const term = state.search.trim().toLowerCase();
+    searchFilter(state, { payload }) {
+      state.filteredContacts = state.contacts;
 
-      if (!term) {
-        state.filteredContacts = favorite
-          ? contacts.filter((contact) => contact.favorite === true)
-          : contacts;
-      } else {
-        state.filteredContacts = contacts.filter((contact) => {
-          const fullName = `${contact.name} ${contact.surname}`.toLowerCase();
-          return (
-            fullName.includes(term) ||
-            contact.email.toLowerCase().includes(term) ||
-            contact.phone.toLowerCase().includes(term)
-          );
-        });
+      if (state.search !== "") {
+        state.filteredContacts = state.contacts.filter(
+          (cont) =>
+            cont.name.toLowerCase().includes(state.search.toLowerCase()) ||
+            cont.email.toLowerCase().includes(state.search.toLowerCase())
+        );
       }
+
+      // After filtering, update the favorite state for the filtered contacts
+      state.filteredContacts.forEach((contact) => {
+        const originalContact = state.contacts.find(
+          (cont) => cont.id === contact.id
+        );
+        contact.favorite = originalContact.favorite;
+      });
     },
   },
 });
@@ -77,7 +90,6 @@ export const {
   saveEditedForm,
   favoriteFunction,
   favoriteSort,
-  setSearchTerm,
-  filterContacts,
+  searchContacts,
+  searchFilter,
 } = formSlice.actions;
-

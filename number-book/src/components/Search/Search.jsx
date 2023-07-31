@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchTerm, selectForm } from "../store/formSlices/formSlice";
+import {
+  searchContacts,
+  searchFilter,
+  selectForm,
+} from "../store/formSlices/formSlice";
 
 function Search() {
-  const { search } = useSelector(selectForm); // Get the search state from the Redux store
+  const { search } = useSelector(selectForm);
   const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
-    dispatch(setSearchTerm(event.target.value));
+    dispatch(searchContacts(event.target.value));
   };
+
+  useEffect(() => {
+    dispatch(searchFilter());
+  }, [search, dispatch]); // Add dispatch to the dependency array
 
   return (
     <input
       type="text"
-      value={search} // Bind the input value to the search state
-      onChange={handleInputChange} // Add this event handler to update the state when the user types
+      value={search}
+      onChange={handleInputChange}
       placeholder="search..."
     />
   );

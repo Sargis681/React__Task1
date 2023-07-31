@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import List from "../List/List";
 import "./AllLists.css";
-import { useSelector } from "react-redux";
-import { selectForm } from "../store/formSlices/formSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addForm, selectForm } from "../store/formSlices/formSlice";
 
 function AllLists() {
-  const { contacts, favorite } = useSelector(selectForm);
+  const { contacts, favorite, filteredContacts } = useSelector(selectForm);
 
-  console.log(contacts);
+
+  // console.log(contacts);
   return (
     <div className="container__allLists">
       {favorite
-        ? contacts
+        ? filteredContacts
             .filter((el) => el.favorite === true)
             .map((el) => (
               <List
@@ -26,7 +27,7 @@ function AllLists() {
                 favorite={el.favorite}
               />
             ))
-        : contacts.map((el) => (
+        : filteredContacts.map((el) => (
             <List
               key={el.id}
               id={el.id}

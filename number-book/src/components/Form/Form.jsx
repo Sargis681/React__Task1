@@ -1,12 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addForm, saveEditedForm, selectForm } from "../store/formSlices/formSlice";
+import {
+  addForm,
+  saveEditedForm,
+  selectForm,
+} from "../store/formSlices/formSlice";
 import "./form.css";
 
 function Form() {
   const dispatch = useDispatch();
   const formRef = useRef(null);
-  const { formEdit } = useSelector(selectForm);
+  const { formEdit, contacts, filteredContacts } = useSelector(selectForm);
+  console.log(contacts);
+  console.log(filteredContacts);
 
   function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,38 +33,41 @@ function Form() {
       formRef.current.number.value = number;
       formRef.current.img.value = img;
       formRef.current.status.value = status;
-
     } else {
       formRef.current.reset();
     }
   }, [formEdit]);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const capName = formRef.current.name.value;
     const name = capName.charAt(0).toUpperCase() + capName.slice(1);
     const capSurNAme = formRef.current.surname.value;
-    const surname = capSurNAme.charAt(0).toUpperCase() + capSurNAme.slice(1);;
+    const surname = capSurNAme.charAt(0).toUpperCase() + capSurNAme.slice(1);
     const email = formRef.current.email.value;
     const number = formRef.current.number.value;
-    
+
     const img =
       formRef.current.img.value ||
       "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-    
+
     const status = formRef.current.status.value;
 
     if (!isValidEmail(email)) {
-      formRef.current.email.value =""
-      formRef.current.email.placeholder ="Please enter a valid email address."
+      formRef.current.email.value = "";
+      formRef.current.email.placeholder = "Please enter a valid email address.";
       return;
-    }else{
-      formRef.current.email.placeholder="Email..."
+    } else {
+      formRef.current.email.placeholder = "Email...";
     }
 
     if (!isValidPhoneNumber(number)) {
-      alert("Please enter a valid phone number.");
+      // alert("Please enter a valid phone number.");
+      formRef.current.number.value = "";
+      formRef.current.number.placeholder = "Please enter a valid phone number.";
       return;
+    } else {
+      formRef.current.number.placeholder = "0...";
     }
 
     if (name !== "" && surname !== "" && email !== "" && number !== "") {
@@ -83,7 +92,7 @@ function Form() {
             number,
             img,
             status,
-            favorite:false,
+            favorite: false,
             id: new Date().getTime().toString(),
           })
         );
@@ -97,11 +106,35 @@ function Form() {
       <form className="container__form" ref={formRef} onSubmit={handleSubmit}>
         <h1>Number List</h1>
         <div className="container__allinputs">
-        <input className="container__input" name="name" placeholder="Name..." required />
-        <input className="container__input" name="surname" placeholder="Surname..." required />
-        <input className="container__input" name="email" placeholder="Email..." required />
-        <input className="container__input" name="number" placeholder="+374..." required />
-        <input className="container__input" name="img" placeholder="img url.." />
+          <input
+            className="container__input"
+            name="name"
+            placeholder="Name..."
+            required
+          />
+          <input
+            className="container__input"
+            name="surname"
+            placeholder="Surname..."
+            required
+          />
+          <input
+            className="container__input"
+            name="email"
+            placeholder="Email..."
+            required
+          />
+          <input
+            className="container__input"
+            name="number"
+            placeholder="+374..."
+            required
+          />
+          <input
+            className="container__input"
+            name="img"
+            placeholder="img url.."
+          />
         </div>
         <select className="container__input" name="status" required>
           <option value="Live">Live</option>
