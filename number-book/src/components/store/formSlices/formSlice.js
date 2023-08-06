@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   contacts: [
-    // ... existing contact objects ...
   ],
   filteredContacts: [],
   formEdit: null,
@@ -69,8 +68,6 @@ const formSlice = createSlice({
             cont.email.toLowerCase().includes(state.search.toLowerCase())
         );
       }
-
-      // After filtering, update the favorite state for the filtered contacts
       state.filteredContacts.forEach((contact) => {
         const originalContact = state.contacts.find(
           (cont) => cont.id === contact.id

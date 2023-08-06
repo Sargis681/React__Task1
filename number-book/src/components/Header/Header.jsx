@@ -22,8 +22,8 @@ function Header() {
     <div>
       <div className="container__header">
         <h1>Number List</h1>
-        <button onClick={toggleFront}>New Contacts</button>
-        <button onClick={handleClick}>{favorite?"All":"Favorites"} </button>
+        <button className='container__contacts' onClick={toggleFront}>New Contacts</button>
+        <button className='container__favorites' onClick={handleClick}>{favorite?"All":"Favorites"} </button>
         <Search/>
       </div>
       <div className="container__formHead" style={{ display: front ? "none" : "block" }}>
