@@ -1,0 +1,25 @@
+.container__pagination {
+    background-color: black;
+
+}
+
+.container__pages {
+    color: wheat;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+
+}
+
+.container__page--active {
+    padding: 4px;
+    cursor: pointer;
+    background-color: rebeccapurple;
+}
+
+.container__page {
+    cursor: pointer;
+}
