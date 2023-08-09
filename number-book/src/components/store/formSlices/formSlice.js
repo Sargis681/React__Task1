@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  contacts: [
-  ],
-  filteredContacts: [],
+  contacts: [],
   formEdit: null,
   favorite: false,
   search: "",
@@ -15,24 +13,21 @@ const formSlice = createSlice({
   reducers: {
     addForm: (state, { payload }) => {
       state.contacts.push(payload);
-      state.filteredContacts.push(payload);
     },
     editForm: (state, { payload }) => {
-      state.formEdit = state.filteredContacts.find(
-        (contact) => contact.id === payload
-      );
+      state.formEdit = state.contacts.find((contact) => contact.id === payload);
     },
     saveEditedForm: (state, { payload }) => {
-      const index = state.filteredContacts.findIndex(
+      const index = state.contacts.findIndex(
         (contact) => contact.id === payload.id
       );
       if (index !== -1) {
-        state.filteredContacts[index] = payload;
+        state.contacts[index] = payload;
         state.formEdit = null;
       }
     },
     deleteList: (state, { payload }) => {
-      state.filteredContacts = state.filteredContacts.filter(
+      state.contacts = state.contacts.filter(
         (contact) => contact.id !== payload
       );
 
@@ -41,12 +36,12 @@ const formSlice = createSlice({
       }
     },
     favoriteFunction: (state, { payload }) => {
-      const contactIndex = state.filteredContacts.findIndex(
+      const contactIndex = state.contacts.findIndex(
         (contact) => contact.id === payload
       );
 
       if (contactIndex !== -1) {
-        const contact = state.filteredContacts[contactIndex];
+        const contact = state.contacts[contactIndex];
         contact.favorite = !contact.favorite;
       }
     },
@@ -57,23 +52,6 @@ const formSlice = createSlice({
     searchContacts: (state, { payload }) => {
       state.search = payload;
       console.log(state.search);
-    },
-    searchFilter(state, { payload }) {
-      state.filteredContacts = state.contacts;
-
-      if (state.search !== "") {
-        state.filteredContacts = state.contacts.filter(
-          (cont) =>
-            cont.name.toLowerCase().includes(state.search.toLowerCase()) ||
-            cont.email.toLowerCase().includes(state.search.toLowerCase())
-        );
-      }
-      state.filteredContacts.forEach((contact) => {
-        const originalContact = state.contacts.find(
-          (cont) => cont.id === contact.id
-        );
-        contact.favorite = originalContact.favorite;
-      });
     },
   },
 });

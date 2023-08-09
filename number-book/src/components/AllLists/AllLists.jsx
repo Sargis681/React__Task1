@@ -1,19 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import List from "../List/List";
 import "./AllLists.css";
-import { useDispatch, useSelector } from "react-redux";
-import { addForm, selectForm } from "../store/formSlices/formSlice";
+import { useSelector } from "react-redux";
+import { selectForm } from "../store/formSlices/formSlice";
 
 function AllLists() {
-  const { contacts, favorite, filteredContacts } = useSelector(selectForm);
+  const { contacts, favorite, search } = useSelector(selectForm);
+  const [filteredContacts, setFilteredContacts] = useState([...contacts]);
 
-  const filteredList = favorite
-    ? filteredContacts.filter((el) => el.favorite === true)
-    : filteredContacts;
+  useEffect(() => {
+    let filtered = [...contacts];
+
+    if (search !== "") {
+      filtered = filtered.filter(
+        (cont) =>
+          cont.name.toLowerCase().includes(search.toLowerCase()) ||
+          cont.email.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (favorite) {
+      filtered = filtered.filter((cont) => cont.favorite);
+    }
+
+    setFilteredContacts(filtered);
+  }, [contacts, search, favorite]);
 
   return (
     <div className="container__allLists">
-      {filteredList.map((el) => (
+      {filteredContacts.map((el) => (
         <List
           key={el.id}
           id={el.id}
