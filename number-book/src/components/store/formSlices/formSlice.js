@@ -5,6 +5,7 @@ const initialState = {
   formEdit: null,
   favorite: false,
   search: "",
+  currentPage: 1,
 };
 
 const formSlice = createSlice({

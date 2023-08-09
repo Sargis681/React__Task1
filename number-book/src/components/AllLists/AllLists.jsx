@@ -3,45 +3,58 @@ import List from "../List/List";
 import "./AllLists.css";
 import { useSelector } from "react-redux";
 import { selectForm } from "../store/formSlices/formSlice";
+import Pagination from "../Pagination/Pagination";
 
 function AllLists() {
   const { contacts, favorite, search } = useSelector(selectForm);
-  const [filteredContacts, setFilteredContacts] = useState([...contacts]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(2);
 
-  useEffect(() => {
-    let filtered = [...contacts];
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = contacts.slice(indexOfFirstItem, indexOfLastItem);
 
+  const filteredContacts = currentItems.filter((cont) => {
     if (search !== "") {
-      filtered = filtered.filter(
-        (cont) =>
-          cont.name.toLowerCase().includes(search.toLowerCase()) ||
-          cont.email.toLowerCase().includes(search.toLowerCase())
+      return (
+        cont.name.toLowerCase().includes(search.toLowerCase()) ||
+        cont.email.toLowerCase().includes(search.toLowerCase())
       );
     }
-
     if (favorite) {
-      filtered = filtered.filter((cont) => cont.favorite);
+      return cont.favorite;
     }
+    return true;
+  });
 
-    setFilteredContacts(filtered);
-  }, [contacts, search, favorite]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, favorite]);
 
   return (
-    <div className="container__allLists">
-      {filteredContacts.map((el) => (
-        <List
-          key={el.id}
-          id={el.id}
-          name={el.name}
-          surName={el.surname}
-          status={el.status}
-          email={el.email}
-          number={el.number}
-          img={el.img}
-          favorite={el.favorite}
-        />
-      ))}
-    </div>
+    <>
+      <div className="container__allLists">
+        {filteredContacts.map((el) => (
+          <List
+            key={el.id}
+            id={el.id}
+            name={el.name}
+            surName={el.surname}
+            status={el.status}
+            email={el.email}
+            number={el.number}
+            img={el.img}
+            favorite={el.favorite}
+          />
+        ))}
+      </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        indexOfLastItem={indexOfLastItem}
+        contacts={contacts}
+      />
+    </>
   );
 }
 
