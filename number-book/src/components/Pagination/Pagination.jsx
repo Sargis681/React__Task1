@@ -11,15 +11,17 @@ function Pagination({
     <>
       <div className="container__pagination">
         <button
+          className="container__button"
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
         >
           Previous
         </button>
-        <span>{currentPage}</span>
+        <span className="container__currentPage">{currentPage}</span>
         <button
           onClick={() => setCurrentPage(currentPage + 1)}
           disabled={indexOfLastItem >= contacts.length}
+          className="container__button--red"
         >
           Next
         </button>

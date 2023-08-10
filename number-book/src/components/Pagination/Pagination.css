@@ -1,0 +1,11 @@
+.container__pagination {
+    width: 100%;
+    text-align: center;
+    margin-top: 20vh;
+}
+
+.container__currentPage {
+    /* background-color: wheat; */
+    font-size: 20px;
+    padding: 5px;
+}

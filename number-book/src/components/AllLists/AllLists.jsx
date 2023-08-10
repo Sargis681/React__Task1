@@ -8,11 +8,11 @@ import Pagination from "../Pagination/Pagination";
 function AllLists() {
   const { contacts, favorite, search } = useSelector(selectForm);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(2);
+  const [itemsPerPage] = useState(3);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = contacts.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = contacts.slice(indexOfFirstItem, indexOfLastItem);
 
   const filteredContacts = contacts.filter((cont) => {
     if (search !== "") {
@@ -53,12 +53,16 @@ function AllLists() {
           />
         ))}
       </div>
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        indexOfLastItem={indexOfLastItem}
-        contacts={filteredContacts}
-      />
+      {contacts.length > 0 ? (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          indexOfLastItem={indexOfLastItem}
+          contacts={filteredContacts}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 }

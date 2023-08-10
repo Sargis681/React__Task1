@@ -1,39 +1,50 @@
+.container__allinputs {
+  width: 500px;
+  margin: 30px auto;
+  text-align: center;
 
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 
-.container__allinputs{
-    width: 500px;
-    margin: 30px auto;
-    text-align: center;
-    
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+select {
+  width: 70px;
+  border: none;
 }
-select{
-    width: 70px;
-    border: none;
+
+.container__add {
+  /* padding: 2px; */
+  width: 40px;
+  margin-top: -50px;
+  background-color: #0c0c0c;
+  color: wheat;
+  cursor: pointer;
+  transition: all 0.3s;
 }
-.container__add{
-    padding: 5px;
-    width: 40px;
-    margin-top: -50px;
-    background-color: #0c0c0c;
-    color: wheat;
-    cursor: pointer;
+
+.container__add:hover {
+  /* padding: 2px; */
+  width: 40px;
+  margin-top: -50px;
+  background-color: #fcfcfc;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 form {
-  background: rgb(245, 244, 244);
+  /* background: rgb(245, 244, 244); */
   padding: 3em;
   border-radius: 20px;
-  border-left: 1px solid white;
-  border-top: 1px solid white;
+  /* border-left: 1px solid white; */
+  /* border-top: 1px solid white; */
   backdrop-filter: blur(10px);
-  box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
+  box-shadow: 20px 20px 70px -6px rgba(0, 0, 0, 0.2);
   text-align: center;
   position: relative;
   transition: all 0.2s ease-in-out;
+  margin-top: 10px;
 }
 
 form p {
@@ -43,7 +54,7 @@ form p {
   font-size: 1.4rem;
   margin-top: 0;
   margin-bottom: 60px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 form a {
@@ -66,23 +77,23 @@ form input {
   border-top: 1px solid white;
   border-radius: 5000px;
   backdrop-filter: blur(5px);
-  box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
   color: #0c0c0c;
   font-family: Montserrat, sans-serif;
   font-weight: 500;
   transition: all 0.2s ease-in-out;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 form input:hover {
-  background: rgba(255,255,255,0.1);
-  box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
 
 form input[type="email"]:focus,
 form input[type="password"]:focus {
-  background: rgba(255,255,255,0.1);
-  box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
 
 form input[type="button"] {
@@ -96,7 +107,7 @@ form input[type="button"]:hover {
 }
 
 form input[type="button"]:active {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 
@@ -104,6 +115,5 @@ form input[type="button"]:active {
   font-family: Montserrat, sans-serif;
   font-weight: bolder;
   color: #0d0c0c;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
-
