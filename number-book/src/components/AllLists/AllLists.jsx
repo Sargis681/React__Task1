@@ -1,37 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import List from "../List/List";
 import "./AllLists.css";
 import { useSelector } from "react-redux";
 import { selectForm } from "../store/formSlices/formSlice";
+import Pagination from "../Pagination/Pagination";
 
 function AllLists() {
-  const { pageNumber, favorite, filteredContacts } = useSelector(selectForm);
+  const { contacts, favorite, search } = useSelector(selectForm);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(2);
 
-  const filteredList = favorite
-    ? filteredContacts.filter((el) => el.favorite === true)
-    : filteredContacts;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = contacts.slice(indexOfFirstItem, indexOfLastItem);
 
-  const startIndex = (pageNumber - 1) * 2;
-  const endIndex = startIndex + 2;
+  const filteredContacts = contacts.filter((cont) => {
+    if (search !== "") {
+      return (
+        cont.name.toLowerCase().includes(search.toLowerCase()) ||
+        cont.email.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    if (favorite) {
+      return cont.favorite;
+    }
+    return true;
+  });
 
-  const displayedContacts = filteredList.slice(startIndex, endIndex);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, favorite]);
+
+  const displayContacts = filteredContacts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   return (
-    <div className="container__allLists">
-      {displayedContacts.map((el) => (
-        <List
-          key={el.id}
-          id={el.id}
-          name={el.name}
-          surName={el.surname}
-          status={el.status}
-          email={el.email}
-          number={el.number}
-          img={el.img}
-          favorite={el.favorite}
-        />
-      ))}
-    </div>
+    <>
+      <div className="container__allLists">
+        {displayContacts.map((el) => (
+          <List
+            key={el.id}
+            id={el.id}
+            name={el.name}
+            surName={el.surname}
+            status={el.status}
+            email={el.email}
+            number={el.number}
+            img={el.img}
+            favorite={el.favorite}
+          />
+        ))}
+      </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        indexOfLastItem={indexOfLastItem}
+        contacts={filteredContacts}
+      />
+    </>
   );
 }
 

@@ -10,9 +10,9 @@ import "./form.css";
 function Form() {
   const dispatch = useDispatch();
   const formRef = useRef(null);
-  const { formEdit, contacts, filteredContacts } = useSelector(selectForm);
+  const { formEdit, contacts } = useSelector(selectForm);
+  // console.log(contacts);
   console.log(contacts);
-  console.log(filteredContacts);
 
   function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
