@@ -14,7 +14,7 @@ function AllLists() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = contacts.slice(indexOfFirstItem, indexOfLastItem);
 
-  const filteredContacts = currentItems.filter((cont) => {
+  const filteredContacts = contacts.filter((cont) => {
     if (search !== "") {
       return (
         cont.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -31,10 +31,15 @@ function AllLists() {
     setCurrentPage(1);
   }, [search, favorite]);
 
+  const displayContacts = filteredContacts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
   return (
     <>
       <div className="container__allLists">
-        {filteredContacts.map((el) => (
+        {displayContacts.map((el) => (
           <List
             key={el.id}
             id={el.id}
@@ -52,7 +57,7 @@ function AllLists() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         indexOfLastItem={indexOfLastItem}
-        contacts={contacts}
+        contacts={filteredContacts}
       />
     </>
   );
