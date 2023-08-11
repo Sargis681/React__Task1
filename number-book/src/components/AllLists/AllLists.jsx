@@ -9,6 +9,7 @@ function AllLists() {
   const { contacts, favorite, search } = useSelector(selectForm);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
+  console.log(contacts, "contacts");
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;

@@ -6,7 +6,7 @@ function SignUpForm() {
       <form action="#">
         <h1>Create Account</h1>
         <div className="container__social">
-          <a href="#" className="container__social-img">
+          {/* <a href="#" className="container__social-img">
             <i className="fab fa-facebook-f"></i>
           </a>
           <a href="#" className="container__social-img">
@@ -14,12 +14,18 @@ function SignUpForm() {
           </a>
           <a href="#" className="container__social-img">
             <i className="fab fa-linkedin-in"></i>
-          </a>
+          </a> */}
         </div>
         <span>or use your email for registration</span>
         <input type="text" placeholder="Name" />
+        <input type="text" placeholder="SurName" />
+
         <input type="email" placeholder="Email" />
+        <input type="email" placeholder="Phone" />
+
         <input type="password" placeholder="Password" />
+        <input type="password" placeholder="Password" />
+
         <button>Sign Up</button>
       </form>
     </div>
