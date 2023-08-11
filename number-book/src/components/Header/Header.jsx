@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { favoriteSort, selectForm } from "../store/formSlices/formSlice";
 import Form from "../Form/Form";
 import Search from "../Search/Search";
+import AllLists from "../AllLists/AllLists";
 
 function Header() {
   const [front, setFront] = useState(true);
@@ -36,6 +37,7 @@ function Header() {
       >
         <Form formRef={formRef} setFront={setFront} />
       </div>
+      <AllLists />
     </div>
   );
 }
