@@ -2,14 +2,13 @@
   width: 500px;
   margin: 30px auto;
   text-align: center;
-
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
 
-select {
+.container__form select {
   width: 70px;
   border: none;
 }
@@ -33,12 +32,9 @@ select {
   cursor: pointer;
 }
 
-form {
-  /* background: rgb(245, 244, 244); */
+.container__form {
   padding: 3em;
   border-radius: 20px;
-  /* border-left: 1px solid white; */
-  /* border-top: 1px solid white; */
   backdrop-filter: blur(10px);
   box-shadow: 20px 20px 70px -6px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -47,27 +43,27 @@ form {
   margin-top: 10px;
 }
 
-form p {
+.container__form p {
   font-weight: 500;
   color: #fff;
   opacity: 0.7;
   font-size: 1.4rem;
   margin-top: 0;
   margin-bottom: 60px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); */
 }
 
-form a {
+.container__form a {
   text-decoration: none;
   color: #ddd;
   font-size: 12px;
 }
 
-form a:active {
+.container__form a:active {
   text-shadow: none;
 }
 
-form input {
+.container__form input {
   background: transparent;
   width: 200px;
   padding: 1em;
@@ -82,36 +78,35 @@ form input {
   font-family: Montserrat, sans-serif;
   font-weight: 500;
   transition: all 0.2s ease-in-out;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgba(46, 45, 45, 0.2);
 }
 
-form input:hover {
+.container__form .container__input:hover {
+  background: rgba(1, 16, 153, 0.185);
+  box-shadow: 4px 4px 60px 8px rgba(136, 137, 145, 0.2);
+}
+
+.container__form .container__input[type="email"]:focus {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
 
-form input[type="email"]:focus,
-form input[type="password"]:focus {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-}
-
-form input[type="button"] {
+.container__form .container__input[type="button"] {
   margin-top: 10px;
   width: 150px;
   font-size: 1rem;
 }
 
-form input[type="button"]:hover {
+.container__form .container__input[type="button"]:hover {
   cursor: pointer;
 }
 
-form input[type="button"]:active {
+.container__form .container__input[type="button"]:active {
   background: rgba(255, 255, 255, 0.2);
 }
 
 
-::placeholder {
+.container__input::placeholder {
   font-family: Montserrat, sans-serif;
   font-weight: bolder;
   color: #0d0c0c;

@@ -1,0 +1,17 @@
+.container__search {
+    border-radius: 10px;
+    padding: 5px;
+    border: none;
+}
+
+.container__search::placeholder {
+    background: url("https://www.iconarchive.com/download/i60242/zerode/plump/Search.ico");
+    background-size: 10%;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.container__search:active {
+    border: none;
+    background-color: rgba(25, 0, 255, 0.295);
+}
