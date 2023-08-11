@@ -1,19 +1,18 @@
 import React from "react";
 import "./list.css";
+import { useDispatch } from "react-redux";
+import {
+  deleteList,
+  editForm,
+  favoriteFunction,
+} from "../store/formSlices/formSlice";
 
-function List({
-  name,
-  surName,
-  email,
-  number,
-  id,
-  onDelete,
-  onEdit,
-  img,
-  status,
-  editView,
-  mail,
-}) {
+function List({ name, surName, email, number, id, img, status, favorite }) {
+  const dispatch = useDispatch();
+  const handleFavoriteClick = () => {
+    dispatch(favoriteFunction(id));
+  };
+
   return (
     <div className="container__cart">
       <div className="container__cart-image">
@@ -22,7 +21,6 @@ function List({
             status === "Live" ? "container__live" : "container__offLine"
           }
         ></span>
-
         <img
           src={
             img ? img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -42,20 +40,29 @@ function List({
           <span className="container__color">Email:</span> {email}
         </span>
         <span>
-          <span className="container__color"> Number:</span> {number}
+          <span className="container__color">Number:</span> {number}
+          {favorite ? (
+            <p className="container__favorite" onClick={handleFavoriteClick}>
+              ★
+            </p>
+          ) : (
+            <p className="container__favorite" onClick={handleFavoriteClick}>
+              ☆
+            </p>
+          )}
         </span>
       </div>
       <div className="container__buttons">
         <button
           className="container__button"
-          onClick={() => {
-            onEdit(id);
-            editView();
-          }}
+          onClick={() => dispatch(editForm(id))}
         >
           Edit
         </button>
-        <button className="container__button--red" onClick={() => onDelete(id)}>
+        <button
+          className="container__button--red"
+          onClick={() => dispatch(deleteList(id))}
+        >
           Delete
         </button>
       </div>

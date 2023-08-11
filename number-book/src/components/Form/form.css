@@ -1,45 +1,114 @@
-.container__form {
-    max-width: 400px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    /* background-color: black; */
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 30px;
-    border: 4px solid rgb(80, 80, 80);
+.container__allinputs {
+  width: 500px;
+  margin: 30px auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-
 .container__form select {
-    /* background-image: linear-gradient(to bottom right, red, rgb(79, 185, 9)); */
+  width: 70px;
+  border: none;
 }
 
 .container__add {
-    background-color: rgb(83, 43, 226);
-    cursor: pointer;
-    color: wheat;
-    font-weight: bolder;
-    font-family: sans-serif;
+  /* padding: 2px; */
+  width: 40px;
+  margin-top: -50px;
+  background-color: #0c0c0c;
+  color: wheat;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-.container__form h1 {
-    color: wheat;
-    text-align: center;
+.container__add:hover {
+  /* padding: 2px; */
+  width: 40px;
+  margin-top: -50px;
+  background-color: #fcfcfc;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
-.container__input {
-    width: 400px;
-    padding: 5px;
-    color: rgb(19, 19, 19);
-    font-weight: bolder;
-    border: none;
-
-    border: 3px solid rgb(34, 20, 20);
-    /* border-radius: 20px; */
+.container__form {
+  padding: 3em;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 20px 20px 70px -6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  margin-top: 10px;
 }
 
-.container__form button {
-    padding: 5px;
+.container__form p {
+  font-weight: 500;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 60px;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); */
+}
+
+.container__form a {
+  text-decoration: none;
+  color: #ddd;
+  font-size: 12px;
+}
+
+.container__form a:active {
+  text-shadow: none;
+}
+
+.container__form input {
+  background: transparent;
+  width: 200px;
+  padding: 1em;
+  margin-bottom: 2em;
+  border: none;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  border-radius: 5000px;
+  backdrop-filter: blur(5px);
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+  color: #0c0c0c;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(46, 45, 45, 0.2);
+}
+
+.container__form .container__input:hover {
+  background: rgba(1, 16, 153, 0.185);
+  box-shadow: 4px 4px 60px 8px rgba(136, 137, 145, 0.2);
+}
+
+.container__form .container__input[type="email"]:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container__form .container__input[type="button"] {
+  margin-top: 10px;
+  width: 150px;
+  font-size: 1rem;
+}
+
+.container__form .container__input[type="button"]:hover {
+  cursor: pointer;
+}
+
+.container__form .container__input[type="button"]:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+.container__input::placeholder {
+  font-family: Montserrat, sans-serif;
+  font-weight: bolder;
+  color: #0d0c0c;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }

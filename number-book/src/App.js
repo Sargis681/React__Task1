@@ -1,75 +1,45 @@
-import React, { useState, useRef } from "react";
+// import { Suspense } from "react";
+// import "./App.css";
+// import { Route } from "react-router-dom"; // Import Route from react-router-dom
+// import Layout from "./components/Layout";
+
+// function App() {
+//   return (
+//     <div className="container">
+//       <Suspense fallback={<div>Loading...</div>}>
+//         <Route path="/two" element={<Layout />} />{" "}
+//         {/* Use element instead of index */}
+//       </Suspense>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import { Suspense } from "react";
 import "./App.css";
-import Form from "./components/Form/Form";
 import AllLists from "./components/AllLists/AllLists";
 
+import Header from "./components/Header/Header";
+import LoginPage from "./components/LoginPage/LoginPage";
+import { Route, Routes } from "react-router";
+import Layout from "./components/Layout";
+
 function App() {
-  const [arr, setArr] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-  const [front, setFront] = useState(true);
-  const [mail, setMail] = useState(false);
-  const [edit, setEdit] = useState(true);
-
-  const formRef = useRef();
-
-  function handleEdit(id) {
-    console.log("barevner");
-    setEdit(false);
-    const itemToEdit = arr.find((item) => item.id === id);
-    if (itemToEdit) {
-      formRef.current.elements.name.value = itemToEdit.name;
-      formRef.current.elements.surname.value = itemToEdit.surname;
-      formRef.current.elements.email.value = itemToEdit.email;
-      formRef.current.elements.number.value = itemToEdit.number;
-      formRef.current.elements.img.value = itemToEdit.img;
-      formRef.current.elements.status.value = itemToEdit.status;
-      setEditingId(id);
-    }
-  }
-
-  function handleDelete(id) {
-    setArr(arr.filter((item) => item.id !== id));
-  }
-  function toggleFront() {
-    setFront((prevFront) => !prevFront);
-    console.log(front);
-  }
-  function editView() {
-    setFront(false);
-  }
   return (
+    // <Suspense>
     <div className="container">
-      <div className="container__header">
-        <h1>Number List</h1>
-        <button onClick={toggleFront}>New Contacts</button>
-      </div>
-      {
-        <div
-          className="container__formHead"
-          style={{ display: front ? "none" : "block" }}
-        >
-          <Form
-            editingId={editingId}
-            setEditingId={setEditingId}
-            formRef={formRef}
-            arr={arr}
-            setArr={setArr}
-            setFront={setFront}
-            mail={mail}
-            setMail={setMail}
-            edit={edit}
-          />
-        </div>
-      }
-
-      <AllLists
-        editView={editView}
-        arr={arr}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-        mail={mail}
-      />
+      <Routes>
+        <Route path="/" element={<Header />} />
+        <Route path="/two" element={<LoginPage />} />
+        {/* <Route path="/two" element={<Layout />}> */}
+        {/* <Route index /> */}
+        {/* <Header /> */}
+        {/* </Route> */}
+      </Routes>
+      {/* <LoginPage /> */}
     </div>
+    // </Suspense>
   );
 }
 
