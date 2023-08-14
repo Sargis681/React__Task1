@@ -1,23 +1,49 @@
-import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { addSignUpForm } from "../store/signUpSlices/signUpSlices";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addSignUpForm,
+  selectSignUp,
+} from "../store/signUpSlices/signUpSlices";
+import axios from "axios";
 
 function SignUpForm() {
   const dispatch = useDispatch();
   const signUpRef = useRef();
+  const { signUpUser } = useSelector(selectSignUp);
+  console.log(signUpUser);
+  const configs = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const addNameToApi = async () => {
+    try {
+      const apiUrl =
+        "https://crudcrud.com/api/11593cb0a8c841ab8eaf4eaa1b01927f/signup";
+      const data = signUpUser;
+      const response = await axios.post(apiUrl, data, configs);
+      console.log("Name added successfully:", response.data);
+    } catch (error) {
+      console.error("Error adding name:", error);
+    }
+  };
+
+  useEffect(() => {
+    addNameToApi();
+  }, [signUpUser]); // Run the effect whenever signUpUser changes
 
   function handleSignUp(e) {
     e.preventDefault();
-    dispatch(
-      addSignUpForm({
-        name: signUpRef.current.name.value,
-        surName: signUpRef.current.surName.value,
-        email: signUpRef.current.email.value,
-        phone: signUpRef.current.phone.value,
-        password: signUpRef.current.password.value,
-        passwordTwo: signUpRef.current.passwordTwo.value, // Corrected line
-      })
-    );
+    const formData = {
+      name: signUpRef.current.name.value,
+      surName: signUpRef.current.surName.value,
+      email: signUpRef.current.email.value,
+      phone: signUpRef.current.phone.value,
+      password: signUpRef.current.password.value,
+      passwordTwo: signUpRef.current.passwordTwo.value,
+    };
+
+    dispatch(addSignUpForm(formData));
   }
 
   return (
