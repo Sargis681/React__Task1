@@ -5,6 +5,7 @@ const initialState = {
   formEdit: null,
   favorite: false,
   search: "",
+  user: "",
   currentPage: 1,
 };
 
@@ -54,6 +55,9 @@ const formSlice = createSlice({
       state.search = payload;
       console.log(state.search);
     },
+    loginAdd: (state, { payload }) => {
+      state.user = payload;
+    },
   },
 });
 
@@ -68,4 +72,5 @@ export const {
   favoriteSort,
   searchContacts,
   searchFilter,
+  loginAdd,
 } = formSlice.actions;

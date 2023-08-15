@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addSignUpForm,
@@ -9,17 +9,20 @@ import axios from "axios";
 function SignUpForm() {
   const dispatch = useDispatch();
   const signUpRef = useRef();
-  const { signUpUser } = useSelector(selectSignUp);
-  console.log(signUpUser);
+  const [error, setError] = useState();
+  const { signUpUser, emailError, phoneError, passwordError } =
+    useSelector(selectSignUp);
+
   const configs = {
     headers: {
       "Content-Type": "application/json",
     },
   };
+
   const addNameToApi = async () => {
     try {
       const apiUrl =
-        "https://crudcrud.com/api/11593cb0a8c841ab8eaf4eaa1b01927f/signup";
+        "https://crudcrud.com/api/d35eb6b5cda0482e8a27e7a29d06d1f3/signup";
       const data = signUpUser;
       const response = await axios.post(apiUrl, data, configs);
       console.log("Name added successfully:", response.data);
@@ -27,10 +30,6 @@ function SignUpForm() {
       console.error("Error adding name:", error);
     }
   };
-
-  useEffect(() => {
-    addNameToApi();
-  }, [signUpUser]); // Run the effect whenever signUpUser changes
 
   function handleSignUp(e) {
     e.preventDefault();
@@ -44,6 +43,18 @@ function SignUpForm() {
     };
 
     dispatch(addSignUpForm(formData));
+
+    if (
+      formData.name &&
+      formData.surName &&
+      formData.email &&
+      formData.phone &&
+      formData.password &&
+      formData.passwordTwo
+    ) {
+      addNameToApi();
+    }
+    signUpRef.current.reset();
   }
 
   return (
@@ -54,16 +65,28 @@ function SignUpForm() {
         <span>or use your email for registration</span>
         <input type="text" placeholder="Name" name="name" />
         <input type="text" placeholder="SurName" name="surName" />
-        <input type="email" placeholder="Email" name="email" />
-        <input type="text" placeholder="Phone" name="phone" />
-        <input type="password" placeholder="Password" name="password" />
+        <input
+          type="email"
+          placeholder={emailError ? emailError : "Email"}
+          name="email"
+        />
+        <input
+          type="text"
+          placeholder={phoneError ? phoneError : "Phone"}
+          name="phone"
+        />
+        <input
+          type="password"
+          placeholder={passwordError ? passwordError : "Password"}
+          name="password"
+        />
         <input
           type="password"
           placeholder="Confirm Password"
           name="passwordTwo"
         />
 
-        <button>Sign Up</button>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );

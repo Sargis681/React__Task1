@@ -9,6 +9,7 @@ const store = configureStore({
     signIn: sigInReducer,
     signUp: signUpReducer,
   },
+  // middleware,
 });
 
 export default store;

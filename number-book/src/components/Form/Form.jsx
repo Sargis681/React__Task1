@@ -9,8 +9,9 @@ import "./form.css";
 
 function Form() {
   const dispatch = useDispatch();
+
   const formRef = useRef(null);
-  const { formEdit, contacts } = useSelector(selectForm);
+  const { formEdit, contacts, user } = useSelector(selectForm);
   // console.log(contacts);
   console.log(contacts);
 
@@ -92,6 +93,7 @@ function Form() {
             number,
             img,
             status,
+            user: user,
             favorite: false,
             id: new Date().getTime().toString(),
           })
