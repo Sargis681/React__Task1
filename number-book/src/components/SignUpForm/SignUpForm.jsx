@@ -22,10 +22,11 @@ function SignUpForm() {
   const addNameToApi = async () => {
     try {
       const apiUrl =
-        "https://crudcrud.com/api/d35eb6b5cda0482e8a27e7a29d06d1f3/signup";
+        "https://crudcrud.com/api/46cddb531d36456ea28733be7974e672/signup";
       const data = signUpUser;
       const response = await axios.post(apiUrl, data, configs);
       console.log("Name added successfully:", response.data);
+      return response.data;
     } catch (error) {
       console.error("Error adding name:", error);
     }
@@ -53,8 +54,8 @@ function SignUpForm() {
       formData.passwordTwo
     ) {
       addNameToApi();
+      // signUpRef.current.reset();
     }
-    signUpRef.current.reset();
   }
 
   return (

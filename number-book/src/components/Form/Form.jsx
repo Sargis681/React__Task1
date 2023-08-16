@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addForm,
@@ -9,10 +9,13 @@ import "./form.css";
 
 function Form() {
   const dispatch = useDispatch();
+  const userId = JSON.parse(localStorage.getItem("matchingUser"))._id || null;
+  console.log(userId);
+  const [idUser, setIdUser] = useState(userId);
 
   const formRef = useRef(null);
   const { formEdit, contacts, user } = useSelector(selectForm);
-  // console.log(contacts);
+  console.log(user._id);
   console.log(contacts);
 
   function isValidEmail(email) {
@@ -43,8 +46,8 @@ function Form() {
     e.preventDefault();
     const capName = formRef.current.name.value;
     const name = capName.charAt(0).toUpperCase() + capName.slice(1);
-    const capSurNAme = formRef.current.surname.value;
-    const surname = capSurNAme.charAt(0).toUpperCase() + capSurNAme.slice(1);
+    const capSurname = formRef.current.surname.value;
+    const surname = capSurname.charAt(0).toUpperCase() + capSurname.slice(1);
     const email = formRef.current.email.value;
     const number = formRef.current.number.value;
 
@@ -63,7 +66,6 @@ function Form() {
     }
 
     if (!isValidPhoneNumber(number)) {
-      // alert("Please enter a valid phone number.");
       formRef.current.number.value = "";
       formRef.current.number.placeholder = "Please enter a valid phone number.";
       return;
@@ -93,7 +95,7 @@ function Form() {
             number,
             img,
             status,
-            user: user,
+            userId: idUser,
             favorite: false,
             id: new Date().getTime().toString(),
           })
@@ -143,7 +145,7 @@ function Form() {
           <option value="Offline">Offline</option>
         </select>
         <button className="container__add" type="submit">
-          Add
+          {formEdit ? "Save" : "Add"}
         </button>
       </form>
     </>

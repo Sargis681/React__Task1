@@ -6,7 +6,11 @@ import {
   selectSignIn,
 } from "../store/signInSlices/signInSlices";
 import axios from "axios";
-import { loginAdd, selectForm } from "../store/formSlices/formSlice";
+import {
+  filterUser,
+  loginAdd,
+  selectForm,
+} from "../store/formSlices/formSlice";
 
 function SignInForm() {
   const { signInUser, emailValidationError } = useSelector(selectSignIn);
@@ -27,7 +31,7 @@ function SignInForm() {
       dispatch(addSignInForm({ email, password }));
 
       const apiUrl =
-        "https://crudcrud.com/api/d35eb6b5cda0482e8a27e7a29d06d1f3/signup"; // Replace with the actual API URL
+        "https://crudcrud.com/api/46cddb531d36456ea28733be7974e672/signup"; // Replace with the actual API URL
 
       axios
         .get(apiUrl)
@@ -39,7 +43,8 @@ function SignInForm() {
 
           console.log(matchingUser);
           if (matchingUser) {
-            dispatch(loginAdd([matchingUser]));
+            localStorage.setItem("matchingUser", JSON.stringify(matchingUser));
+            dispatch(loginAdd(matchingUser));
             navigate("/");
           }
         })
@@ -61,7 +66,6 @@ function SignInForm() {
           name="email"
           placeholder={emailValidationError ? emailValidationError : "email"}
         />
-        {/* {emailValidationError ? <span>{emailValidationError}</span> : ""} */}
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Sign In</button>
       </form>

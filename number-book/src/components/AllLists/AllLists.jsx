@@ -6,14 +6,14 @@ import { selectForm } from "../store/formSlices/formSlice";
 import Pagination from "../Pagination/Pagination";
 
 function AllLists() {
-  const { contacts, favorite, search } = useSelector(selectForm);
+  const { contacts, favorite, search, user } = useSelector(selectForm);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
-  console.log(contacts, "contacts");
+  console.log(user);
 
+  // console.log(user);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = contacts.slice(indexOfFirstItem, indexOfLastItem);
 
   const filteredContacts = contacts.filter((cont) => {
     if (search !== "") {
@@ -40,19 +40,21 @@ function AllLists() {
   return (
     <>
       <div className="container__allLists">
-        {displayContacts.map((el) => (
-          <List
-            key={el.id}
-            id={el.id}
-            name={el.name}
-            surName={el.surname}
-            status={el.status}
-            email={el.email}
-            number={el.number}
-            img={el.img}
-            favorite={el.favorite}
-          />
-        ))}
+        {displayContacts
+          .filter((el) => el._id === user.id)
+          .map((el) => (
+            <List
+              key={el.id}
+              id={el.id}
+              name={el.name}
+              surName={el.surname}
+              status={el.status}
+              email={el.email}
+              number={el.number}
+              img={el.img}
+              favorite={el.favorite}
+            />
+          ))}
       </div>
       {contacts.length > 0 ? (
         <Pagination

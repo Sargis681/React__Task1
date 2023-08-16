@@ -1,22 +1,27 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchContacts, selectForm } from "../store/formSlices/formSlice";
-import "./Search.css"
+import "./Search.css";
+import User from "../User/User";
 function Search() {
-  const { search } = useSelector(selectForm);
+  const { search, user } = useSelector(selectForm);
   const dispatch = useDispatch();
   const handleInputChange = (event) => {
     dispatch(searchContacts(event.target.value));
   };
+  console.log(user);
 
   return (
-    <input
-    className="container__search"
-      type="text"
-      value={search}
-      onChange={handleInputChange}
-      placeholder="search..."
-    />
+    <div className="container__search--all">
+      <input
+        className="container__search"
+        type="text"
+        value={search}
+        onChange={handleInputChange}
+        placeholder="search..."
+      />
+      <User />
+    </div>
   );
 }
 

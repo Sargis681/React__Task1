@@ -15,3 +15,8 @@
     border: none;
     background-color: rgba(25, 0, 255, 0.295);
 }
+
+.container__search--all {
+    display: flex;
+    gap: 14px;
+}
