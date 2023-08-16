@@ -9,7 +9,6 @@ function Search() {
   const handleInputChange = (event) => {
     dispatch(searchContacts(event.target.value));
   };
-  console.log(user);
 
   return (
     <div className="container__search--all">

@@ -6,7 +6,6 @@ function User() {
   const navigate = useNavigate();
   const userFromLocalStorage = JSON.parse(localStorage.getItem("matchingUser"));
   const [user, setUser] = useState(userFromLocalStorage);
-  console.log(user);
   function functionLogout() {
     localStorage.removeItem("matchingUser");
     navigate("/two");
@@ -17,8 +16,6 @@ function User() {
       navigate("/two");
     }
   }, [user]);
-
-  console.log(user);
 
   return (
     <div>

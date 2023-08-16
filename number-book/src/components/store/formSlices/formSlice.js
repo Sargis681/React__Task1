@@ -49,14 +49,13 @@ const formSlice = createSlice({
     },
     favoriteSort: (state) => {
       state.favorite = !state.favorite;
-      console.log(state.favorite);
     },
     searchContacts: (state, { payload }) => {
       state.search = payload;
-      console.log(state.search);
     },
     loginAdd: (state, { payload }) => {
       state.user = payload;
+      console.log(payload);
     },
   },
 });

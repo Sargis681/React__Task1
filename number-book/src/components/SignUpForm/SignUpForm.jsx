@@ -5,6 +5,7 @@ import {
   selectSignUp,
 } from "../store/signUpSlices/signUpSlices";
 import axios from "axios";
+import CryptoJS from "crypto-js";
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -34,13 +35,15 @@ function SignUpForm() {
 
   function handleSignUp(e) {
     e.preventDefault();
+    const HPass = CryptoJS.SHA256(signUpRef.current.passwordTwo.value).toString(
+      CryptoJS.enc.Hex
+    );
     const formData = {
       name: signUpRef.current.name.value,
       surName: signUpRef.current.surName.value,
       email: signUpRef.current.email.value,
       phone: signUpRef.current.phone.value,
-      password: signUpRef.current.password.value,
-      passwordTwo: signUpRef.current.passwordTwo.value,
+      password: HPass,
     };
 
     dispatch(addSignUpForm(formData));

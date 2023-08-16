@@ -14,11 +14,9 @@ import {
 
 function SignInForm() {
   const { signInUser, emailValidationError } = useSelector(selectSignIn);
-  console.log(signInUser);
   const dispatch = useDispatch();
   const signInRef = useRef();
   const { user } = useSelector(selectForm);
-  console.log(user);
   const navigate = useNavigate();
 
   function handleSignInChange(e) {
@@ -36,12 +34,11 @@ function SignInForm() {
       axios
         .get(apiUrl)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data + "    " + "data");
           let matchingUser = response.data.find(
             (el) => el.email === email && el.password === password
           );
 
-          console.log(matchingUser);
           if (matchingUser) {
             localStorage.setItem("matchingUser", JSON.stringify(matchingUser));
             dispatch(loginAdd(matchingUser));

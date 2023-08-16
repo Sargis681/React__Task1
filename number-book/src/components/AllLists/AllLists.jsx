@@ -11,7 +11,6 @@ function AllLists() {
   const [itemsPerPage] = useState(3);
   console.log(user);
 
-  // console.log(user);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -36,12 +35,12 @@ function AllLists() {
     indexOfFirstItem,
     indexOfLastItem
   );
-
+  console.log(displayContacts.filter((el) => el.userId === user?._id));
   return (
     <>
       <div className="container__allLists">
         {displayContacts
-          .filter((el) => el._id === user.id)
+          .filter((el) => el.userId === user?._id)
           .map((el) => (
             <List
               key={el.id}
