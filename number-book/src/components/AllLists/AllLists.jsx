@@ -55,7 +55,8 @@ function AllLists() {
             />
           ))}
       </div>
-      {contacts.length > 0 ? (
+      {contacts.length > 0 &&
+      displayContacts.filter((el) => el.userId === user?._id).length > 0 ? (
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

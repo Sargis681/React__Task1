@@ -6,13 +6,17 @@ import {
   selectSignIn,
 } from "../store/signInSlices/signInSlices";
 import axios from "axios";
+import CryptoJS from "crypto-js"; // Import CryptoJS for password hashing
 import {
   filterUser,
   loginAdd,
   selectForm,
 } from "../store/formSlices/formSlice";
+import { useAxios } from "../../hook/useApi";
 
 function SignInForm() {
+  const [useApi] = useAxios();
+  console.log(useApi);
   const { signInUser, emailValidationError } = useSelector(selectSignIn);
   const dispatch = useDispatch();
   const signInRef = useRef();
@@ -26,17 +30,19 @@ function SignInForm() {
     const password = signInRef.current.password.value;
 
     if (email !== "" || password !== "") {
-      dispatch(addSignInForm({ email, password }));
+      // Hash the password using SHA-256
+      const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+
+      dispatch(addSignInForm({ email, password: passwordHash })); // Store the hashed password
 
       const apiUrl =
-        "https://crudcrud.com/api/46cddb531d36456ea28733be7974e672/signup"; // Replace with the actual API URL
+        "https://crudcrud.com/api/58cdc3d1b1e4448aacda8e9f0e5d1783/signup";
 
       axios
         .get(apiUrl)
         .then((response) => {
-          // console.log(response.data + "    " + "data");
           let matchingUser = response.data.find(
-            (el) => el.email === email && el.password === password
+            (el) => el.email === email && el.password === passwordHash
           );
 
           if (matchingUser) {
@@ -48,6 +54,8 @@ function SignInForm() {
         .catch((error) => {
           console.error("Error:", error);
         });
+      // useApi();
+
       signInRef.current.reset();
     }
   }

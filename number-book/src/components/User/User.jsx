@@ -18,8 +18,14 @@ function User() {
   }, [user]);
 
   return (
-    <div>
-      <span>{user?.name}</span>/<span onClick={functionLogout}>Logout</span>
+    <div className="container__user">
+      <span className="container__userName">
+        {user?.name[0].toUpperCase() + user.name.slice(1)}
+      </span>
+      /
+      <span className="container__logout" onClick={functionLogout}>
+        Logout
+      </span>
     </div>
   );
 }

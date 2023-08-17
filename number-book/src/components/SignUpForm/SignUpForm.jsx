@@ -23,9 +23,8 @@ function SignUpForm() {
   const addNameToApi = async () => {
     try {
       const apiUrl =
-        "https://crudcrud.com/api/46cddb531d36456ea28733be7974e672/signup";
-      const data = signUpUser;
-      const response = await axios.post(apiUrl, data, configs);
+        "https://crudcrud.com/api/58cdc3d1b1e4448aacda8e9f0e5d1783/signup";
+      const response = await axios.post(apiUrl, signUpUser, configs);
       console.log("Name added successfully:", response.data);
       return response.data;
     } catch (error) {
@@ -35,15 +34,16 @@ function SignUpForm() {
 
   function handleSignUp(e) {
     e.preventDefault();
-    const HPass = CryptoJS.SHA256(signUpRef.current.passwordTwo.value).toString(
-      CryptoJS.enc.Hex
-    );
+    const passwordHash = CryptoJS.SHA256(
+      signUpRef.current.passwordTwo.value
+    ).toString(CryptoJS.enc.Hex);
+
     const formData = {
       name: signUpRef.current.name.value,
       surName: signUpRef.current.surName.value,
       email: signUpRef.current.email.value,
       phone: signUpRef.current.phone.value,
-      password: HPass,
+      password: passwordHash,
     };
 
     dispatch(addSignUpForm(formData));
@@ -53,8 +53,7 @@ function SignUpForm() {
       formData.surName &&
       formData.email &&
       formData.phone &&
-      formData.password &&
-      formData.passwordTwo
+      formData.password
     ) {
       addNameToApi();
       // signUpRef.current.reset();
@@ -71,17 +70,17 @@ function SignUpForm() {
         <input type="text" placeholder="SurName" name="surName" />
         <input
           type="email"
-          placeholder={emailError ? emailError : "Email"}
+          placeholder={emailError || "Email"} // Use logical OR to show the placeholder or the error message
           name="email"
         />
         <input
           type="text"
-          placeholder={phoneError ? phoneError : "Phone"}
+          placeholder={phoneError || "Phone"} // Use logical OR to show the placeholder or the error message
           name="phone"
         />
         <input
           type="password"
-          placeholder={passwordError ? passwordError : "Password"}
+          placeholder={passwordError || "Password"} // Use logical OR to show the placeholder or the error message
           name="password"
         />
         <input
