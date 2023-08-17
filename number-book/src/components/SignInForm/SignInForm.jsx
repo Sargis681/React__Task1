@@ -6,17 +6,17 @@ import {
   selectSignIn,
 } from "../store/signInSlices/signInSlices";
 import axios from "axios";
-import CryptoJS from "crypto-js"; // Import CryptoJS for password hashing
+import CryptoJS from "crypto-js";
 import {
   filterUser,
   loginAdd,
   selectForm,
 } from "../store/formSlices/formSlice";
-import { useAxios } from "../../hook/useApi";
+import { useFetchUserData } from "../../hook/useApi"; // Updated import
 
 function SignInForm() {
-  const [useApi] = useAxios();
-  console.log(useApi);
+  const [fetchUserData] = useFetchUserData(); // Updated variable name
+  console.log(fetchUserData);
   const { signInUser, emailValidationError } = useSelector(selectSignIn);
   const dispatch = useDispatch();
   const signInRef = useRef();
@@ -30,31 +30,43 @@ function SignInForm() {
     const password = signInRef.current.password.value;
 
     if (email !== "" || password !== "") {
-      // Hash the password using SHA-256
       const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
-      dispatch(addSignInForm({ email, password: passwordHash })); // Store the hashed password
+      dispatch(addSignInForm({ email, password: passwordHash }));
 
-      const apiUrl =
-        "https://crudcrud.com/api/58cdc3d1b1e4448aacda8e9f0e5d1783/signup";
+      // const apiUrl =
+      //   "https://crudcrud.com/api/58cdc3d1b1e4448aacda8e9f0e5d1783/signup";
 
-      axios
-        .get(apiUrl)
-        .then((response) => {
-          let matchingUser = response.data.find(
-            (el) => el.email === email && el.password === passwordHash
-          );
+      // axios
+      //   .get(apiUrl)
+      //   .then((response) => {
+      //     let matchingUser = response.data.find(
+      //       (el) => el.email === email && el.password === passwordHash
+      //     );
 
-          if (matchingUser) {
-            localStorage.setItem("matchingUser", JSON.stringify(matchingUser));
-            dispatch(loginAdd(matchingUser));
-            navigate("/");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-      // useApi();
+      //     if (matchingUser) {
+      //       localStorage.setItem("matchingUser", JSON.stringify(matchingUser));
+      //       dispatch(loginAdd(matchingUser));
+      //       navigate("/");
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error:", error);
+      //   });
+      const data = fetchUserData();
+      data.then((data) => {
+        let matchingUser = data.find(
+          (el) => el.email === email && el.password === passwordHash
+        );
+
+        if (matchingUser) {
+          localStorage.setItem("matchingUser", JSON.stringify(matchingUser));
+          dispatch(loginAdd(matchingUser));
+          navigate("/");
+        }
+      });
+
+      // console.log(el)); // Updated function call
 
       signInRef.current.reset();
     }
