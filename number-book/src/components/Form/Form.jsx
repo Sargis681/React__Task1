@@ -6,11 +6,13 @@ import {
   selectForm,
 } from "../store/formSlices/formSlice";
 import "./form.css";
+import { useFetchUserData } from "../../hook/useApi";
 
 function Form() {
   const dispatch = useDispatch();
   const userId = JSON.parse(localStorage.getItem("matchingUser"))._id || null;
   const [idUser, setIdUser] = useState(userId);
+  const [fetchUserData, addNameToApi] = useFetchUserData();
 
   const formRef = useRef(null);
   const { formEdit, contacts, user } = useSelector(selectForm);
@@ -39,7 +41,7 @@ function Form() {
     }
   }, [formEdit]);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     const capName = formRef.current.name.value;
     const name = capName.charAt(0).toUpperCase() + capName.slice(1);
@@ -97,10 +99,26 @@ function Form() {
             id: new Date().getTime().toString(),
           })
         );
+
+        try {
+          addNameToApi({
+            name,
+            surname,
+            email,
+            number,
+            img,
+            status,
+            userId: idUser,
+            favorite: false,
+            id: new Date().getTime().toString(),
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
       formRef.current.reset();
     }
-  };
+  }
 
   return (
     <>

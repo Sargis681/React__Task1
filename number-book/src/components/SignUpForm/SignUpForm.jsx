@@ -1,11 +1,12 @@
+// SignUpForm.js
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addSignUpForm,
   selectSignUp,
 } from "../store/signUpSlices/signUpSlices";
-import axios from "axios";
 import CryptoJS from "crypto-js";
+import { useFetchUserData } from "../../hook/useApi";
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -13,26 +14,9 @@ function SignUpForm() {
   const [error, setError] = useState();
   const { signUpUser, emailError, phoneError, passwordError } =
     useSelector(selectSignUp);
+  const [fetchUserData, addNameToApi] = useFetchUserData();
 
-  const configs = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  const addNameToApi = async () => {
-    try {
-      const apiUrl =
-        "https://crudcrud.com/api/58cdc3d1b1e4448aacda8e9f0e5d1783/signup";
-      const response = await axios.post(apiUrl, signUpUser, configs);
-      console.log("Name added successfully:", response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Error adding name:", error);
-    }
-  };
-
-  function handleSignUp(e) {
+  async function handleSignUp(e) {
     e.preventDefault();
     const passwordHash = CryptoJS.SHA256(
       signUpRef.current.passwordTwo.value
@@ -55,8 +39,14 @@ function SignUpForm() {
       formData.phone &&
       formData.password
     ) {
-      addNameToApi();
-      // signUpRef.current.reset();
+      try {
+        console.log(signUpUser);
+        await addNameToApi(signUpUser);
+
+        // signUpRef.current.reset();
+      } catch (error) {
+        setError("An error occurred while adding the name.");
+      }
     }
   }
 
@@ -68,19 +58,11 @@ function SignUpForm() {
         <span>or use your email for registration</span>
         <input type="text" placeholder="Name" name="name" />
         <input type="text" placeholder="SurName" name="surName" />
-        <input
-          type="email"
-          placeholder={emailError || "Email"} // Use logical OR to show the placeholder or the error message
-          name="email"
-        />
-        <input
-          type="text"
-          placeholder={phoneError || "Phone"} // Use logical OR to show the placeholder or the error message
-          name="phone"
-        />
+        <input type="email" placeholder={emailError || "Email"} name="email" />
+        <input type="text" placeholder={phoneError || "Phone"} name="phone" />
         <input
           type="password"
-          placeholder={passwordError || "Password"} // Use logical OR to show the placeholder or the error message
+          placeholder={passwordError || "Password"}
           name="password"
         />
         <input

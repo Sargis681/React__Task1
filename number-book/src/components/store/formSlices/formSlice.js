@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   contacts: [],
+
   formEdit: null,
   favorite: false,
   search: "",
@@ -47,6 +48,7 @@ const formSlice = createSlice({
         contact.favorite = !contact.favorite;
       }
     },
+
     favoriteSort: (state) => {
       state.favorite = !state.favorite;
     },
